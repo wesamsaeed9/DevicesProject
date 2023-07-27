@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class DeviceMonitor {
 
-    //private final Object lock = new Object();
+    private final Object lock = new Object();
     private List<Device> devices;
     private Timer statusUpdateTimer;
 
@@ -35,17 +35,17 @@ public class DeviceMonitor {
     }
 
     public void addDevice(Device device) {
-        //synchronized (lock) {
+        synchronized (lock) {
             this.devices.add(device);
-        //}
+        }
     }
 
     public void removeDevice(Device device) {
-        //synchronized (lock) {
-            //if (devices != null && devices.contains(device)) {
-                //devices.remove(device);
-            //}
-        //}
+        synchronized (lock) {
+            if (devices != null && devices.contains(device)) {
+                devices.remove(device);
+            }
+        }
     }
 
     private class StatusUpdateTask extends TimerTask {
@@ -53,13 +53,17 @@ public class DeviceMonitor {
 
         @Override
         public void run() {
-            //synchronized (lock) {
-                for (Device device : devices) {
-                    // Simulate random status updates
-                    boolean isOnline = random.nextBoolean();
-                    device.setStatus(isOnline ? "Online" : "Offline");
-                }
-            //}
+            for (Device device : devices) {
+                // Simulate random status updates
+                boolean isOnline = random.nextBoolean();
+                    Platform.runLater(() -> {
+                        synchronized (lock) {
+                            if (devices.contains(device)) {
+                                device.setStatus(isOnline ? "Online" : "Offline");
+                            }
+                        }
+                    });
+            }
         }
     }
 }

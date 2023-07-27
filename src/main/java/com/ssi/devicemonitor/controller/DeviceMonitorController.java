@@ -1,6 +1,7 @@
 package com.ssi.devicemonitor.controller;
 
 import com.ssi.devicemonitor.entity.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class DeviceMonitorController implements Initializable {
     private SerializeEngine serializeEngine;
     @FXML
     private ComboBox<DeviceType> deviceTypeComboBox;
+    private Timer dataUpdateTimer;
 
     public void setSerializeEngine(SerializeEngine serializeEngine) {
         this.serializeEngine = serializeEngine;
@@ -95,6 +97,9 @@ public class DeviceMonitorController implements Initializable {
 
         propertiesContainer.setVisible(false);
 
+        dataUpdateTimer = new Timer();
+        dataUpdateTimer.schedule(new DataUpdateTask(), 0, 500);
+
     }
 
     private List<Device> getDevicesFromFile() {
@@ -118,9 +123,9 @@ public class DeviceMonitorController implements Initializable {
         removeItem.setOnAction(event -> {
             Device selectedDevice = deviceListView.getSelectionModel().getSelectedItem();
             if (selectedDevice != null) {
-                deviceMonitor.removeDevice(selectedDevice);
-                deviceListView.getItems().remove(selectedDevice);
                 hideDeviceProperties();
+                deviceMonitor.removeDevice(selectedDevice);
+                //deviceListView.getItems().remove(selectedDevice);
             }
         });
 
@@ -202,7 +207,7 @@ public class DeviceMonitorController implements Initializable {
 
         @Override
         public void run() {
-            refreshListView();
+            Platform.runLater(() -> refreshListView());
         }
     }
 
