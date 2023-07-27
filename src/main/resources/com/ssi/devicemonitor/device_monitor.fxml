@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ListView fx:id="deviceListView" layoutX="45.0" layoutY="46.0" onMouseClicked="#OnDeviceListViewSelected" prefHeight="308.0" prefWidth="205.0" />
+        <TextField fx:id="deviceNameTextField" layoutX="277.0" layoutY="46.0" prefWidth="222.0" />
+        <Button fx:id="addDeviceButton" layoutX="277.0" layoutY="119.0" mnemonicParsing="false" onAction="#addDevice" text="Add Device" />
+      <ComboBox fx:id="deviceTypeComboBox" accessibleRoleDescription="Ch" layoutX="277.0" layoutY="83.0" prefWidth="150.0" />
+      <VBox fx:id="propertiesContainer" layoutX="279.0" layoutY="167.0" prefHeight="208.0" prefWidth="285.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="106.0" text="Manufacturer" />
+                  <TextField fx:id="manufacturerTextBox" prefHeight="26.0" prefWidth="201.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="95.0" text="Device Type" />
+                  <TextField fx:id="deviceTypeTextBox" editable="false" prefHeight="26.0" prefWidth="192.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="109.0" text="Location" />
+                  <TextField fx:id="locationTextBox" prefHeight="26.0" prefWidth="204.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="105.0" text="Version" />
+                  <TextField fx:id="versionTextBox" prefHeight="26.0" prefWidth="200.0" />
+               </children></HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="109.0" text="Mac Address" />
+                  <TextField fx:id="macAddressTextBox" prefHeight="26.0" prefWidth="202.0" />
+               </children></HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="131.0" text="Installation Date Time" />
+                  <TextField fx:id="installationDateTimeTextBox" prefHeight="26.0" prefWidth="178.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="closePropertiesContainerButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnClosePropertiesContainerButtonClicked" prefHeight="25.0" prefWidth="50.0" text="Close">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>
